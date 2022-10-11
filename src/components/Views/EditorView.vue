@@ -1,19 +1,21 @@
 <template>
   <div class="editor" :style="{ backgroundColor: popupStyle.canvas.bgColor }">
-    <div class="editor-canvas" id="editor-canvas" />
-    <EditorSidebar @formSaved="renderPopup" />
+    <div class="editor-canvas" id="editor-canvas">
+      <Popup />
+    </div>
+    <EditorSidebar />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-// import Popup from "@/components/Base/BasePopup.vue";
+import Popup from "@/components/Base/BasePopup.vue";
 
 import EditorSidebar from "@/components/Editor/EditorSidebar.vue";
 export default {
   components: {
     EditorSidebar,
-    // Popup,
+    Popup,
   },
   computed: {
     ...mapGetters({
@@ -21,32 +23,8 @@ export default {
       popupContent: "popup/getPopupContent",
     }),
   },
-  mounted() {
-    this.renderPopup();
-  },
-  watch: {
-    popupStyle: {
-      // eslint-disable-next-line no-unused-vars
-      handler: function (after, before) {
-        this.renderPopup();
-      },
-      deep: true,
-    },
-    popupContent: {
-      // eslint-disable-next-line no-unused-vars
-      handler: function (after, before) {
-        this.renderPopup();
-      },
-      deep: true,
-    },
-  },
   methods: {
     draggable() {},
-    renderPopup() {
-      const container = document.querySelector("#editor-canvas");
-      container.innerHTML = "";
-      container.append(this.generatePopup());
-    },
     generatePopup() {
       // Create a element with params
       function createElement(elementObj) {

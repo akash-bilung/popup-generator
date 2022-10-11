@@ -6,51 +6,57 @@
     }"
   >
     <div class="pt_popup_content">
-      <div class="pt_popup_icons">
-        <template v-if="!!popupContent.stars">
-          <Star
-            :icon="{ fill: popupStyle.content.stars }"
-            v-for="n in popupContent.stars"
-            :key="n"
-          />
-        </template>
-      </div>
-      <h2 class="pt_popup_title" :style="{ color: popupStyle.content.heading }">
-        {{ popupContent.heading }}
-      </h2>
-      <input
-        type="text"
-        class="pt_popup_input form-control"
-        :style="{
-          backgroundColor: popupStyle.form.input,
-          color: popupStyle.form.inputText,
-        }"
-        :placeholder="popupContent.emailPlaceholder"
+      <component
+        :is="item.id"
+        :data-index="item.order"
+        v-for="item in popupItems"
+        :key="item.id"
+        :popupStyle="popupStyle"
+        :popupContent="popupContent"
       />
-      <button
-        type="submit"
-        :style="{ backgroundColor: popupStyle.form.btn }"
-        class="pt_popup_input_submit"
-      >
-        {{ popupContent.btnText }}
-      </button>
-      <p :style="{ color: popupStyle.content.text }">
-        {{ popupContent.footerText }}
-      </p>
     </div>
   </div>
 </template>
 
 <script>
-import Star from "@/components/Icons/IconStar.vue";
 import { mapGetters } from "vuex";
+import PtIcons from "@/components/Popup/PopupIcons.vue";
+import PtHeading from "@/components/Popup/PopupHeading.vue";
+import PtInput from "@/components/Popup/PopupInput.vue";
+import PtButton from "@/components/Popup/PopupButton.vue";
+import PtFooter from "@/components/Popup/PopupFooter.vue";
 export default {
   components: {
-    Star,
+    PtIcons,
+    PtHeading,
+    PtInput,
+    PtButton,
+    PtFooter,
   },
   data() {
     return {
-      stars: 3,
+      popupItems: [
+        {
+          order: 1,
+          id: "pt-icons",
+        },
+        {
+          order: 2,
+          id: "pt-heading",
+        },
+        {
+          order: 3,
+          id: "pt-input",
+        },
+        {
+          order: 4,
+          id: "pt-button",
+        },
+        {
+          order: 5,
+          id: "pt-footer",
+        },
+      ],
     };
   },
   computed: {
