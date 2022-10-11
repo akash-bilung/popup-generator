@@ -5,4 +5,7 @@ export default {
   setCanvas({ commit }, payload) {
     commit("setCanvas", payload);
   },
+  setPopupOrder({ commit }, payload) {
+    commit("setPopupOrder", payload);
+  },
 };

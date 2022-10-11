@@ -5,4 +5,7 @@ export default {
   getPopupContent(state) {
     return state.content;
   },
+  getPopupOrder(state) {
+    return state.order;
+  },
 };

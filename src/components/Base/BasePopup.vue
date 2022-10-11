@@ -45,34 +45,13 @@ export default {
   data() {
     return {
       dragStartIndex: null,
-      popupItems: [
-        {
-          order: 1,
-          id: "pt-icons",
-        },
-        {
-          order: 2,
-          id: "pt-heading",
-        },
-        {
-          order: 3,
-          id: "pt-input",
-        },
-        {
-          order: 4,
-          id: "pt-button",
-        },
-        {
-          order: 5,
-          id: "pt-footer",
-        },
-      ],
     };
   },
   computed: {
     ...mapGetters({
       popupStyle: "popup/getPopupStyle",
       popupContent: "popup/getPopupContent",
+      popupItems: "popup/getPopupOrder",
     }),
   },
   methods: {
@@ -109,6 +88,7 @@ export default {
       var element = this.popupItems[fromIndex];
       this.popupItems.splice(fromIndex, 1);
       this.popupItems.splice(toIndex, 0, element);
+      this.$store.dispatch("popup/setPopupOrder", this.popupItems);
     },
   },
 };

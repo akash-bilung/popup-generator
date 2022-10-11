@@ -5,4 +5,7 @@ export default {
   setCanvas(state, payload) {
     state.canvas = payload;
   },
+  setPopupOrder(state, payload) {
+    state.order = payload;
+  },
 };
