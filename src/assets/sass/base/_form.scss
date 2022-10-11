@@ -11,6 +11,10 @@
         color: $gray-200;
     }
 
+    &:read-only{
+        background-color: $gray-150;
+    }
+
     &:focus{
         outline: none;
     }
@@ -20,6 +24,12 @@ label{
     display: inline-block;
     font-size: 1.4rem;
     cursor: pointer;
+}
+
+.form-wrap{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 $color-picker-size: 3rem;

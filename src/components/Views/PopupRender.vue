@@ -37,7 +37,6 @@ export default {
   },
   mounted() {
     this.renderPopup();
-    console.log(this.popupItems);
   },
   methods: {
     renderPopup() {
