@@ -41,6 +41,7 @@ export default {
     },
   },
   methods: {
+    draggable() {},
     renderPopup() {
       const container = document.querySelector("#editor-canvas");
       container.innerHTML = "";
@@ -73,38 +74,63 @@ export default {
         style: `background-color: ${this.popupStyle.body.bgColor}`,
       });
       const children = [
-        createElement({
-          elem: "DIV",
-          className: "icons-top pt_popup_icons",
-        }),
-        createElement({
-          elem: "H2",
-          className: "pt_popup_title",
-          style: `color: ${this.popupStyle.content.heading}`,
-          innerHTML: this.popupContent.heading,
-        }),
-        createElement({
-          elem: "INPUT",
-          type: "text",
-          className: "pt_popup_input form-control",
-          style: `
+        {
+          title: "icons",
+          item: () => {
+            return createElement({
+              elem: "DIV",
+              className: "icons-top pt_popup_icons",
+            });
+          },
+        },
+        {
+          title: "heading",
+          item: () => {
+            return createElement({
+              elem: "H2",
+              className: "pt_popup_title",
+              style: `color: ${this.popupStyle.content.heading}`,
+              innerHTML: this.popupContent.heading,
+            });
+          },
+        },
+        {
+          title: "input",
+          item: () => {
+            return createElement({
+              elem: "INPUT",
+              type: "text",
+              className: "pt_popup_input form-control",
+              style: `
             background-color: ${this.popupStyle.form.input};
             color: ${this.popupStyle.form.inputText};
           `,
-          placeholder: this.popupContent.emailPlaceholder,
-        }),
-        createElement({
-          elem: "BUTTON",
-          type: "submit",
-          className: "pt_popup_input_submit",
-          style: `background-color: ${this.popupStyle.form.btn};`,
-          innerHTML: this.popupContent.btnText,
-        }),
-        createElement({
-          elem: "p",
-          style: `color: ${this.popupStyle.content.text};`,
-          innerHTML: this.popupContent.footerText,
-        }),
+              placeholder: this.popupContent.emailPlaceholder,
+            });
+          },
+        },
+        {
+          title: "button",
+          item: () => {
+            return createElement({
+              elem: "BUTTON",
+              type: "submit",
+              className: "pt_popup_input_submit",
+              style: `background-color: ${this.popupStyle.form.btn};`,
+              innerHTML: this.popupContent.btnText,
+            });
+          },
+        },
+        {
+          title: "footer",
+          item: () => {
+            return createElement({
+              elem: "p",
+              style: `color: ${this.popupStyle.content.text};`,
+              innerHTML: this.popupContent.footerText,
+            });
+          },
+        },
       ];
 
       for (let i = 0; i < this.popupContent.stars; i++) {
@@ -117,7 +143,7 @@ export default {
         className: "pt_popup_content",
       });
       children.forEach((e) => {
-        popupContent.appendChild(e);
+        popupContent.appendChild(e.item());
       });
       popup.appendChild(popupContent);
       return popup;
