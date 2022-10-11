@@ -1,5 +1,5 @@
 <template>
-  <div class="icons-top pt_popup_icons">
+  <div class="pt_popup_icons" :class="iconsPositionClass">
     <template v-if="!!popupContent.stars">
       <Star
         :icon="{ fill: popupStyle.content.stars }"
@@ -18,6 +18,10 @@ export default {
     Star,
   },
   props: {
+    position: {
+      type: Number,
+      default: null,
+    },
     popupStyle: {
       type: Object,
       default: () => {},
@@ -25,6 +29,19 @@ export default {
     popupContent: {
       type: Object,
       default: () => {},
+    },
+  },
+  computed: {
+    iconsPositionClass() {
+      let cls;
+      if (this.position === 0) {
+        cls = "icons-top";
+      } else if (this.position === 4) {
+        cls = "icons-bottom";
+      } else {
+        cls = "";
+      }
+      return cls;
     },
   },
 };

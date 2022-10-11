@@ -7,11 +7,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    .pt_popup{
-        &_content{
-            & > *{
-                cursor: move;
-            }
+    .draggable{
+        cursor: move;
+        &.over{
+            opacity: 0.5;
         }
     }
 }

@@ -8,8 +8,17 @@
     <div class="pt_popup_content">
       <component
         :is="item.id"
-        :data-index="item.order"
-        v-for="item in popupItems"
+        draggable="true"
+        class="draggable"
+        @dragstart="dragStart"
+        @dragover="dragOver"
+        @drop="dragDrop"
+        @dragenter="dragEnter"
+        @dragleave="dragLeave"
+        :data-order="item.order"
+        :position="index"
+        :data-index="index"
+        v-for="(item, index) in popupItems"
         :key="item.id"
         :popupStyle="popupStyle"
         :popupContent="popupContent"
@@ -35,6 +44,7 @@ export default {
   },
   data() {
     return {
+      dragStartIndex: null,
       popupItems: [
         {
           order: 1,
@@ -64,6 +74,42 @@ export default {
       popupStyle: "popup/getPopupStyle",
       popupContent: "popup/getPopupContent",
     }),
+  },
+  methods: {
+    dragStart(e) {
+      this.dragStartIndex = +e.target
+        .closest(".draggable")
+        .getAttribute("data-index");
+      // console.log('Event: ', 'dragstart');
+    },
+
+    dragEnter(e) {
+      // console.log('Event: ', 'dragenter');
+      e.target.classList.add("over");
+    },
+
+    dragLeave(e) {
+      // console.log('Event: ', 'dragleave');
+      e.target.classList.remove("over");
+    },
+
+    dragOver(e) {
+      // console.log('Event: ', 'dragover');
+      e.preventDefault();
+    },
+
+    dragDrop(e) {
+      const dragEndIndex = +e.target.getAttribute("data-index");
+      this.swapItems(this.dragStartIndex, dragEndIndex);
+      e.target.classList.remove("over");
+      // console.log('Event: ', 'drop');
+    },
+    // Swap list items that are drag and drop
+    swapItems(fromIndex, toIndex) {
+      var element = this.popupItems[fromIndex];
+      this.popupItems.splice(fromIndex, 1);
+      this.popupItems.splice(toIndex, 0, element);
+    },
   },
 };
 </script>
