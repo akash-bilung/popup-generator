@@ -30,23 +30,23 @@ export default () => ({
   },
   order: [
     {
-      order: 1,
+      order: 0,
       id: "pt-icons",
     },
     {
-      order: 2,
+      order: 1,
       id: "pt-heading",
     },
     {
-      order: 3,
+      order: 2,
       id: "pt-input",
     },
     {
-      order: 4,
+      order: 3,
       id: "pt-button",
     },
     {
-      order: 5,
+      order: 4,
       id: "pt-footer",
     },
   ],

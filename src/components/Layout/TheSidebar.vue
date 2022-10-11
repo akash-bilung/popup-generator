@@ -13,6 +13,12 @@
       <router-link to="/popups">
         <i class="ti-files"></i> <span>Popups</span>
       </router-link>
+      <router-link to="/popups/view">
+        <i class="ti-eye"></i> <span>Preview</span>
+      </router-link>
+      <router-link to="/popups/create">
+        <i class="ti-eye"></i> <span>Create</span>
+      </router-link>
     </nav>
   </aside>
 </template>

@@ -15,7 +15,6 @@
         @drop="dragDrop"
         @dragenter="dragEnter"
         @dragleave="dragLeave"
-        :data-order="item.order"
         :position="index"
         :data-index="index"
         v-for="(item, index) in popupItems"
@@ -85,10 +84,16 @@ export default {
     },
     // Swap list items that are drag and drop
     swapItems(fromIndex, toIndex) {
-      var element = this.popupItems[fromIndex];
+      const element = this.popupItems[fromIndex];
       this.popupItems.splice(fromIndex, 1);
       this.popupItems.splice(toIndex, 0, element);
-      this.$store.dispatch("popup/setPopupOrder", this.popupItems);
+      const newArr = this.popupItems.map((e, index) => {
+        return {
+          id: e.id,
+          order: index,
+        };
+      });
+      this.$store.dispatch("popup/setPopupOrder", newArr);
     },
   },
 };
