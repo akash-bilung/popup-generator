@@ -1,13 +1,32 @@
+$btn-radius: 5px;
+
 .btn{
     display: inline-block;
     border: 1px solid transparent;
     padding: 1rem 2rem;
     font-size: 1.6rem;
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: $btn-radius;
     color: $white;
     cursor: pointer;
     transition: 0.3s background-color ease-in-out;
+}
+
+.btn-group{
+  & > .btn{
+    border-radius: 0;
+    padding: 0.7rem 1.4rem;
+    font-size: 1.4rem;
+    &:not(:last-child){
+      border-right: 1px solid darken($primary, 5%);
+    }
+    &:nth-child(1){
+      border-radius: $btn-radius 0 0 $btn-radius;
+    }
+    &:last-child{
+      border-radius: 0 $btn-radius $btn-radius 0;
+    }
+  }
 }
 
 .btn {

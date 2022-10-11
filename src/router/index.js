@@ -2,21 +2,14 @@ import { createRouter, createWebHistory } from "vue-router";
 
 // Components
 import EditorView from "@/components/Views/EditorView.vue";
-import App from "@/App.vue";
+import DashboardView from "@/components/Views/DashboardView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {
-      path: "/",
-      name: "app",
-      component: App,
-    },
-    {
-      path: "/popups",
-      name: "popups",
-      component: EditorView,
-    },
+    { path: "/", redirect: "/popups" },
+    { path: "/popups", name: "popups", component: DashboardView },
+    { path: "/popups/create", name: "popups-create", component: EditorView },
   ],
 });
 

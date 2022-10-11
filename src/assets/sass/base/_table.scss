@@ -1,14 +1,22 @@
-table{
+.table{
   border-collapse: collapse;
+  width: 100%;
   & > thead > tr > th,
   & > tbody > tr > td{
     text-align: left;
     padding: 1rem;
   }
   & > thead > tr > th{
+    font-weight: 400;
+    color: darken($gray-150, 20%);
+    font-size: 1.4rem;
+    font-weight: 500;
+    border-bottom: 1px solid $gray-150;
+    text-transform: uppercase;
   }
   & > tbody > tr > td{
-
+    font-weight: 600;
+    color: $gray-500;
   }
 }
 .table{
