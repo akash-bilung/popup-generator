@@ -1,6 +1,6 @@
 <?php
-    extract($_REQUEST);
-    $file=fopen("file.js" "a");
-    fwrite($file, "console.log('Hello World')");
-    fclose($file)
+    $handle = fopen('read.js', 'w');
+    $string = 'console.log("Hello World")';
+    fwrite($handle, $string);
+    fclose($handle)
 ?>
