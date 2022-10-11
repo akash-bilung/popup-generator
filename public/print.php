@@ -1,8 +1,4 @@
 <?php
-$myfile = fopen("newfile.js", "w") or die("Unable to open file!");
-$txt = "John Doe\n";
-fwrite($myfile, $txt);
-$txt = "Jane Doe\n";
-fwrite($myfile, $txt);
-fclose($myfile);
-?>
+header('Content-Type: text/javascript')
+header('Content-Disposition: attachment; filename="script.js"')
+?>console.log('Hello World')
