@@ -8,6 +8,14 @@
 
     <form @submit.prevent="submitForm" class="sidebar-form">
       <div class="sidebar-form-fieldset">
+        <div class="sidebar-section">
+          <BaseFormInput
+            v-model="popupName"
+            label="Popup Name"
+            id="popup-name"
+            placeholder="Name of your Popup"
+          />
+        </div>
         <EditorSidebarDesign v-if="activeTab === 'popup-design'" />
         <EditorSidebarContent v-if="activeTab === 'popup-content'" />
       </div>
@@ -20,6 +28,7 @@
 </template>
 
 <script>
+import BaseFormInput from "@/components/Base/BaseFormInput.vue";
 import Tab from "@/components/Editor/EditorSidebarTab.vue";
 import EditorSidebarDesign from "@/components/Editor/EditorSidebarDesign.vue";
 import EditorSidebarContent from "@/components/Editor/EditorSidebarContent.vue";
@@ -29,12 +38,14 @@ import { mapGetters } from "vuex";
 export default {
   emits: ["formSaved"],
   components: {
+    BaseFormInput,
     Tab,
     EditorSidebarContent,
     EditorSidebarDesign,
   },
   data() {
     return {
+      popupName: "",
       activeTab: "popup-design",
     };
   },
