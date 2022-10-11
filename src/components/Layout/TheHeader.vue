@@ -1,5 +1,7 @@
 <template>
-  <nav>
-    <router-link to="/editor">Editor</router-link>
-  </nav>
+  <header class="header">
+    <nav>
+      <router-link to="/editor">Editor</router-link>
+    </nav>
+  </header>
 </template>
