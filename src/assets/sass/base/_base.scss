@@ -1,0 +1,56 @@
+/** ========= RESET ========= */
+
+*,
+*::after,
+*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior : smooth;
+    font-size: calcFontPercentage(10);
+}
+
+body{
+    background-color: $gray-400;
+    box-sizing: border-box;
+    position: relative;
+}
+
+ul, ol{
+    list-style: none;
+    margin-bottom: 0;
+}
+span{
+  display: inline-block;
+}
+a{
+  display: inline-block;
+  &, &:hover, &:visited, &:active, &:focus{
+      text-decoration: none;
+  }
+  color: inherit;
+  transition: 0.25s color ease-in-out;
+}
+
+img, video, picture, iframe{
+    display: block;
+    max-width: 100%;
+}
+
+sup{
+    font-size: 60%;
+    vertical-align: text-top;
+    position: relative;
+    top: -0.2em;
+}
+sub {
+    top: 0.3em;
+}
+
+::selection{
+    background-color: $gray-500;
+    color: $white;
+}

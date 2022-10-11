@@ -1,0 +1,78 @@
+// Text Alignment
+.text {
+  &-center {
+    text-align: center;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-left {
+    text-align: left;
+  }
+}
+
+// Text Decoration
+.text-uppercase{
+    text-transform: uppercase;
+}
+.text-capitalize{
+    text-transform: capitalize;
+}
+.text-underline{
+    text-decoration: underline;
+}
+
+/** Text Colors */
+.text {
+  @each $name, $color in $theme {
+    &-#{$name} {
+      color: $color !important;
+    }
+  }
+}
+
+/** Margins */
+.m-auto{
+  &, *{
+    margin: auto;
+  }
+}
+.mb {
+  &-0 {
+    margin-bottom: 0 !important;
+  }
+}
+
+/** Paddings */
+.p {
+  &-0{
+    padding: 0 ;
+  }
+  &-2{
+    padding: 2rem;
+  }
+}
+
+/** Backgrounds */
+.bg {
+  @each $name, $color in $theme {
+    &-#{$name} {
+      background: $color !important;
+    }
+  }
+}
+
+// Margins
+.mb{
+  &-05{
+    margin-bottom: 0.5rem;
+  }
+  &-1{
+    margin-bottom: 1rem;
+  }
+  &-2{
+    margin-bottom: 2rem;
+  }
+}

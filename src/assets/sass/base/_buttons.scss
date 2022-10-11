@@ -1,0 +1,22 @@
+.btn{
+    display: inline-block;
+    border: 1px solid transparent;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-radius: 5px;
+    color: $white;
+    cursor: pointer;
+    transition: 0.3s background-color ease-in-out;
+}
+
+.btn {
+    @each $name, $color in $theme {
+      &-#{$name} {
+        background-color: $color;
+        &:hover{
+            background-color: lighten($color, 5%);
+        }
+      }
+    }
+  }
