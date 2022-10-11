@@ -7,6 +7,19 @@ $sidebar-padding: 1rem 2rem;
     height: 100%;
     overflow: auto;
     width: $sidebar-width;
+    display: flex;
+    flex-direction: column;
+
+    &-form{
+        display: flex;
+        flex-direction: column;
+        &-fieldset{
+            flex: 1;
+        }
+        &-btn{
+            padding: 2rem;
+        }
+    }
 
     &-section{
         padding: $sidebar-padding;

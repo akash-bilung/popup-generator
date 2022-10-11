@@ -6,12 +6,14 @@
       :activeTab="activeTab"
     />
 
-    <form @submit.prevent="generateForm">
-      <EditorSidebarDesign v-if="activeTab === 'popup-design'" />
-      <EditorSidebarContent v-if="activeTab === 'popup-content'" />
+    <form @submit.prevent="generateForm" class="sidebar-form">
+      <div class="sidebar-form-fieldset">
+        <EditorSidebarDesign v-if="activeTab === 'popup-design'" />
+        <EditorSidebarContent v-if="activeTab === 'popup-content'" />
+      </div>
 
-      <div class="p-2">
-        <button type="submit" class="btn btn-primary">Save</button>
+      <div class="sidebar-form-btn">
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
       </div>
     </form>
   </aside>
