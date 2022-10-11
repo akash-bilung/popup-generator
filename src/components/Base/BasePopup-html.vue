@@ -1,19 +1,57 @@
 <template>
-  <div class="editor" :style="{ backgroundColor: popupStyle.canvas.bgColor }">
-    <div class="editor-canvas" id="editor-canvas" />
-    <EditorSidebar @formSaved="renderPopup" />
+  <div
+    class="pt_popup"
+    :style="{
+      backgroundColor: popupStyle.body.bgColor,
+    }"
+  >
+    <div class="pt_popup_content">
+      <div class="pt_popup_icons">
+        <template v-if="!!popupContent.stars">
+          <Star
+            :icon="{ fill: popupStyle.content.stars }"
+            v-for="n in popupContent.stars"
+            :key="n"
+          />
+        </template>
+      </div>
+      <h2 class="pt_popup_title" :style="{ color: popupStyle.content.heading }">
+        {{ popupContent.heading }}
+      </h2>
+      <input
+        type="text"
+        class="pt_popup_input form-control"
+        :style="{
+          backgroundColor: popupStyle.form.input,
+          color: popupStyle.form.inputText,
+        }"
+        :placeholder="popupContent.emailPlaceholder"
+      />
+      <button
+        type="submit"
+        :style="{ backgroundColor: popupStyle.form.btn }"
+        class="pt_popup_input_submit"
+      >
+        {{ popupContent.btnText }}
+      </button>
+      <p :style="{ color: popupStyle.content.text }">
+        {{ popupContent.footerText }}
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
+import Star from "@/components/Icons/IconStar.vue";
 import { mapGetters } from "vuex";
-// import Popup from "@/components/Base/BasePopup.vue";
-
-import EditorSidebar from "@/components/Editor/EditorSidebar.vue";
 export default {
   components: {
-    EditorSidebar,
-    // Popup,
+    Star,
+  },
+  data() {
+    return {
+      stars: 3,
+    };
   },
   computed: {
     ...mapGetters({
@@ -21,31 +59,7 @@ export default {
       popupContent: "popup/getPopupContent",
     }),
   },
-  mounted() {
-    this.renderPopup();
-  },
-  watch: {
-    popupStyle: {
-      // eslint-disable-next-line no-unused-vars
-      handler: function (after, before) {
-        this.renderPopup();
-      },
-      deep: true,
-    },
-    popupContent: {
-      // eslint-disable-next-line no-unused-vars
-      handler: function (after, before) {
-        this.renderPopup();
-      },
-      deep: true,
-    },
-  },
   methods: {
-    renderPopup() {
-      const container = document.querySelector("#editor-canvas");
-      container.innerHTML = "";
-      container.append(this.generatePopup());
-    },
     generatePopup() {
       // Create a element with params
       function createElement(elementObj) {
@@ -75,7 +89,7 @@ export default {
       const children = [
         createElement({
           elem: "DIV",
-          className: "icons-top pt_popup_icons",
+          className: "pt_popup_icons",
         }),
         createElement({
           elem: "H2",
@@ -120,10 +134,9 @@ export default {
         popupContent.appendChild(e);
       });
       popup.appendChild(popupContent);
-      return popup;
+      console.log(popup);
+      document.querySelector(".sidebar").appendChild(popup);
     },
   },
 };
 </script>
-
-<style></style>
