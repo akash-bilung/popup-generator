@@ -1,4 +1,6 @@
 <?php
-header('Content-Type: text/javascript')
-header('Content-Disposition: attachment; filename="script.js"')
-?>console.log('Hello World')
+    ectract($_REQUEST);
+    $file=fopen("file.js" "a");
+    fwrite($file, "console.log('Hello World')");
+    fclose($file)
+?>
