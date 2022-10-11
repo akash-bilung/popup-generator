@@ -1,1 +1,5 @@
-export default {};
+export default {
+  getSidebarState(state) {
+    return state.sidebarIsCollapsed;
+  },
+};
