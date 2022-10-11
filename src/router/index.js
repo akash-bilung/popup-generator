@@ -7,6 +7,7 @@ import PopupRender from "@/components/Views/PopupRender.vue";
 
 const router = createRouter({
   history: createWebHistory(),
+  linkActiveClass: "active",
   routes: [
     { path: "/", redirect: "/popups" },
     { path: "/popups", name: "popups", component: DashboardView },
