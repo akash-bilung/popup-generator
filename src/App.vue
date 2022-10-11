@@ -1,6 +1,12 @@
 <template>
+  <TheSidebar />
   <router-view />
 </template>
 <script>
-export default {};
+import TheSidebar from "@/components/Layout/TheSidebar.vue";
+export default {
+  components: {
+    TheSidebar,
+  },
+};
 </script>
