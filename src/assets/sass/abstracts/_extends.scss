@@ -27,3 +27,12 @@
       outline: none;
   }
 }
+
+%btn{
+  display: inline-block;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 500;
+  background: transparent
+}

@@ -1,21 +1,3 @@
-// Popup Variables
-
-$popup-size: 500px;
-$large-star: 1.6;
-
-@keyframes fadeIn {
-    0%{
-        opacity: 0;
-        visibility: hidden;
-        transform: translate(-50%, -40%);
-    }
-    100%{
-        opacity: 1;
-        visibility: visible;
-        transform: translate(-50%, -50%);
-    }
-}
-
 .pt{
     &_popup{
         animation: fadeIn 1s linear 1s forwards;

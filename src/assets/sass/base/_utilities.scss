@@ -24,7 +24,7 @@
     text-decoration: underline;
 }
 
-/** Text Colors */
+// Text Colors
 .text {
   @each $name, $color in $theme {
     &-#{$name} {
@@ -33,49 +33,33 @@
   }
 }
 
-/** Margins */
+// Margins
 .m-auto{
   &, *{
     margin: auto;
   }
 }
-.mb {
+.mb{
   &-0 {
     margin-bottom: 0 !important;
   }
-  &-2 {
+  &-05{
+    margin-bottom: 0.5rem !important;
+  }
+  &-1{
+    margin-bottom: 1rem !important;
+  }
+  &-2{
     margin-bottom: 2rem !important;
   }
 }
 
-/** Paddings */
+// Paddings
 .p {
   &-0{
     padding: 0 ;
   }
   &-2{
     padding: 2rem;
-  }
-}
-
-/** Backgrounds */
-.bg {
-  @each $name, $color in $theme {
-    &-#{$name} {
-      background: $color !important;
-    }
-  }
-}
-
-// Margins
-.mb{
-  &-05{
-    margin-bottom: 0.5rem;
-  }
-  &-1{
-    margin-bottom: 1rem;
-  }
-  &-2{
-    margin-bottom: 2rem;
   }
 }
