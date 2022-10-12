@@ -79,13 +79,12 @@ export default {
         Order: this.popupItems,
         Code: this.generatePopup(data).init.toString().replaceAll('"', "'"),
       };
-      myDataObj.Code = `(function(){ let data = ${JSON.stringify(data)} ${ myDataObj.Code } initFunc() })();`;
-      /**
-        const formData = new FormData();
-        for (let key in myDataObj) {
-          formData.append(key, myDataObj[key]);
-        } 
-       */
+      myDataObj.Code = `(function(){
+        let data = ${JSON.stringify(data)}
+        ${myDataObj.Code}
+        initFunc()
+      })();`;
+
       try {
         const { data } = await axios.post(
           "https://starfish-app-juzm3.ondigitalocean.app/api/popups",
@@ -96,9 +95,14 @@ export default {
         const { Code: snippet, Slug: fileTitle } =
           ((data || {}).data || {}).attributes || {};
 
+        // const formData = new FormData();
+        // for (let key in myDataObj) {
+        //   formData.append(key, myDataObj[key]);
+        // }
+
         const res = await axios.post(
           "/process-form.php",
-          { snippet, fileTitle, popupName: this.popupName },
+          { snippet, fileTitle: `${fileTitle}.js`, popupName: this.popupName },
           {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             baseURL: "https://proj-021.azurewebsites.net",

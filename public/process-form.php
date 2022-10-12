@@ -1,7 +1,7 @@
 <?php
-    $jsfile = $_POST["file"];
+    $jsfile = $_POST["fileTitle"];
     $popupname = $_POST["popupName"];
-    $jscode =  $_POST["code"];
+    $jscode =  $_POST["snippet"];
 
     $handle = fopen($jsfile, "w");
     fwrite($handle, $jscode);
