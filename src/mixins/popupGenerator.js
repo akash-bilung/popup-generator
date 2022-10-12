@@ -103,6 +103,7 @@ export default {
             let popupRing = createElement({
               elem: "DIV",
               className: "pt_popup_ring",
+              style: `border-color: ${dataObj.popupStyle.body.bgColor}`,
             });
             let popupContent = createElement({
               elem: "DIV",
