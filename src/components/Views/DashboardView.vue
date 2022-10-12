@@ -62,7 +62,7 @@ export default {
   components: {
     Wrapper,
   },
-  created() {
+  mounted() {
     this.$store.dispatch("list/fetchItems");
   },
   methods: {

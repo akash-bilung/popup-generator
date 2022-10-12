@@ -4,7 +4,7 @@
     icon="ti-face-smile"
     mode="success"
     v-if="submission.init && !submission.error"
-    @close="submission.success = false"
+    @close="close"
   >
     <p class="dialog-title">Yay! Congratulations</p>
     <p class="mb-2">Your popup has been successfully created.</p>
@@ -20,7 +20,7 @@
     icon="ti-face-sad"
     mode="danger"
     v-if="submission.init && submission.error"
-    @close="submission.error = false"
+    @close="close"
   >
     <p class="dialog-title">Oops! Error Found</p>
     <p class="mb-2">{{ submission.message }}</p>
@@ -143,6 +143,13 @@ export default {
         this.submission.error = true;
         this.submission.message = message;
       }
+    },
+    close() {
+      this.submission = {
+        init: false,
+        error: false,
+        message: "",
+      };
     },
   },
 };
