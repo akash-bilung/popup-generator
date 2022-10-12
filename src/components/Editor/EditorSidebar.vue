@@ -13,6 +13,7 @@
             v-model="popupName"
             label="Popup Name"
             name="popup-name"
+            class="form-control"
             id="popup-name"
             placeholder="Name of your Popup"
           />
