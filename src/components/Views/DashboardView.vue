@@ -36,7 +36,7 @@
               </td>
             </tr>
           </template>
-          <tr>
+          <tr v-else>
             <td colspan="4">
               <div class="p-2 text-center">
                 Currently you don't have any popups.
