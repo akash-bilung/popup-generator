@@ -17,7 +17,7 @@
         <i class="ti-eye"></i> <span>Preview</span>
       </router-link>
       <router-link to="/popups/create">
-        <i class="ti-eye"></i> <span>Create</span>
+        <i class="ti-pencil-alt"></i> <span>Create</span>
       </router-link>
     </nav>
   </aside>

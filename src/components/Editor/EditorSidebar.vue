@@ -30,14 +30,17 @@
 </template>
 
 <script>
+// Components
 import BaseFormInput from "@/components/Base/BaseFormInput.vue";
 import Tab from "@/components/Editor/EditorSidebarTab.vue";
 import EditorSidebarDesign from "@/components/Editor/EditorSidebarDesign.vue";
 import EditorSidebarContent from "@/components/Editor/EditorSidebarContent.vue";
+
+// Mixins
 import popupGenerator from "@/mixins/popupGenerator.js";
 
+// Getters
 import { mapGetters } from "vuex";
-import axios from "axios";
 export default {
   mixins: [popupGenerator],
   emits: ["formSaved"],
@@ -66,53 +69,21 @@ export default {
       this.activeTab = tab;
     },
     async submitForm() {
+      this.isLoading = true;
       this.$emit("formSaved");
-      const data = {
-        popupStyle: this.popupStyle,
-        popupContent: this.popupContent,
-        popupItems: this.popupItems,
-      };
-
-      const myDataObj = {
+      const { isSuccess } = await this.$store.dispatch("list/createItem", {
         Name: this.popupName,
         Slug: this.slugify(this.popupName),
-        Style: this.popupStyle,
-        Content: this.popupContent,
-        Order: this.popupItems,
-        Code: this.generatePopup(data).init.toString().replaceAll('"', "'"),
-      };
-      myDataObj.Code = `(function(){
-        let e = ${JSON.stringify(data)}
-        ${myDataObj.Code.replace(
-          "function(){const",
-          "function initFunc(){const"
-        )}
-        initFunc()
-      })();`;
-
-      try {
-        const { data } = await axios.post("/popups", {
-          data: myDataObj,
-        });
-        const { Code: snippet, Slug: fileTitle } =
-          ((data || {}).data || {}).attributes || {};
-
-        // const formData = new FormData();
-        // for (let key in myDataObj) {
-        //   formData.append(key, myDataObj[key]);
-        // }
-
-        const res = await axios.post(
-          "/process-form.php",
-          { snippet, fileTitle: `${fileTitle}.js`, popupName: this.popupName },
-          {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            baseURL: "https://proj-021.azurewebsites.net",
-          }
-        );
-        console.log(res);
-      } catch (error) {
-        console.log(error);
+        Code: this.generatePopup({
+          popupStyle: this.popupStyle,
+          popupContent: this.popupContent,
+          popupItems: this.popupItems,
+        })
+          .init.toString()
+          .replaceAll('"', "'"),
+      });
+      if (isSuccess) {
+        this.isLoading = false;
       }
     },
   },

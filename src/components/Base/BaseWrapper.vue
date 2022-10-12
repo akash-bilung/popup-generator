@@ -50,7 +50,7 @@ export default {
     this.$store.dispatch("list/fetchItems");
   },
   methods: {
-    copy(url) { 
+    copy(url) {
       navigator.clipboard.writeText(url);
     },
   },
