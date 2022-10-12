@@ -9,7 +9,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import Popup from "@/components/Base/BasePopup.vue";
+import Popup from "@/components/Popup/PopupBase.vue";
 
 import EditorSidebar from "@/components/Editor/EditorSidebar.vue";
 export default {
