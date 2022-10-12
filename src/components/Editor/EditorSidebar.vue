@@ -28,8 +28,9 @@
       <div class="sidebar-form-fieldset">
         <div class="sidebar-section">
           <BaseFormInput
-            v-model="popupName"
+            v-model.trim="popupName"
             label="Popup Name"
+            :mode="isValid ? '' : 'danger'"
             name="popup-name"
             id="popup-name"
             placeholder="Name of your Popup"
@@ -72,12 +73,23 @@ export default {
   },
   data() {
     return {
+      isValid: true,
       error: null,
       successSubmission: false,
       isLoading: false,
       popupName: "",
       activeTab: "popup-design",
     };
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    popupName(after, before) {
+      if (after) {
+        this.isValid = true;
+      } else {
+        this.isValid = false;
+      }
+    },
   },
   computed: {
     ...mapGetters({
@@ -91,6 +103,10 @@ export default {
       this.activeTab = tab;
     },
     async submitForm() {
+      if (!this.popupName) {
+        this.isValid = false;
+        return;
+      }
       this.isLoading = true;
       this.$emit("formSaved");
       const { isSuccess, message } = await this.$store.dispatch(

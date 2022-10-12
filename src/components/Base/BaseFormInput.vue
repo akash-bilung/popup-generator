@@ -15,6 +15,7 @@
         :readonly="isNumber"
         :placeholder="placeholder"
         :id="id"
+        :class="mode"
         class="form-control"
         :value="modelValue"
         @input="changeInput($event)"
@@ -35,6 +36,10 @@
 export default {
   emits: ["update:modelValue"],
   props: {
+    mode: {
+      type: String,
+      default: "",
+    },
     placeholder: {
       type: String,
       default: "",
