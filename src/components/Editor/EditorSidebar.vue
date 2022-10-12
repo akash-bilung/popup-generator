@@ -13,7 +13,6 @@
             v-model="popupName"
             label="Popup Name"
             name="popup-name"
-            className="form-control"
             id="popup-name"
             placeholder="Name of your Popup"
           />
@@ -93,16 +92,18 @@ export default {
         } 
        */
       try {
-        const { data } = await axios.post("http://localhost:1337/api/popups", {
-          data: myDataObj,
-        });
+        const { data } = await axios.post(
+          "https://starfish-app-juzm3.ondigitalocean.app/api/popups",
+          {
+            data: myDataObj,
+          }
+        );
         const { Code: snippet, Slug: fileTitle } =
           ((data || {}).data || {}).attributes || {};
-        console.log(snippet, fileTitle);
 
         const res = await axios.post(
           "/process-form.php",
-          { snippet, fileTitle },
+          { snippet, fileTitle, popupName: this.popupName },
           {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             baseURL: "https://proj-021.azurewebsites.net",
