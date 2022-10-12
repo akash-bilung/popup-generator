@@ -1,7 +1,9 @@
 <?php
-    $filename = $_POST['file']
-    $popupname = $_POST['popupName']
-    $jscode =  $_POST['code']
+    $jsfile = $_POST["file"];
+    $popupname = $_POST["popupName"];
+    $jscode =  $_POST["code"];
 
-    var_dump($filename, $popupname, $jscode)
+    $handle = fopen($jsfile, "w");
+    fwrite($handle, $jscode);
+    fclose($handle);
 ?>

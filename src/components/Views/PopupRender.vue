@@ -34,9 +34,10 @@ export default {
   },
   methods: {
     renderPopup() {
-      const container = document.querySelector("#popup-viewport");
-      container.innerHTML = "";
-      container.appendChild(this.generatePopup());
+      this.generatePopup().init();
+      // const container = document.querySelector("#popup-viewport");
+      // container.innerHTML = "";
+      // container.appendChild(this.generatePopup());
     },
   },
 };

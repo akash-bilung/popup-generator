@@ -33,10 +33,12 @@ import BaseFormInput from "@/components/Base/BaseFormInput.vue";
 import Tab from "@/components/Editor/EditorSidebarTab.vue";
 import EditorSidebarDesign from "@/components/Editor/EditorSidebarDesign.vue";
 import EditorSidebarContent from "@/components/Editor/EditorSidebarContent.vue";
+import popupGenerator from "@/mixins/popupGenerator.js";
 
 import { mapGetters } from "vuex";
 import axios from "axios";
 export default {
+  mixins: [popupGenerator],
   emits: ["formSaved"],
   components: {
     BaseFormInput,
@@ -66,8 +68,9 @@ export default {
       const myDataObj = {
         popupName: this.popupName,
         file: `${this.slugify(this.popupName)}.js`,
-        code: "",
+        code: this.generatePopup().init.toString().replaceAll('"', "'"),
       };
+      console.log(myDataObj);
       // const formData = new FormData();
 
       // for (let key in myDataObj) {
