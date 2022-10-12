@@ -1,28 +1,30 @@
 <template>
-  <div class="pt_popup" :style="{ backgroundColor: popupStyle.body.bgColor }">
-    <div
-      class="pt_popup_ring"
-      :style="{ borderColor: popupStyle.body.bgColor }"
-    ></div>
-    <div class="pt_popup_content">
-      <component
-        :is="item.id"
-        draggable="true"
-        class="draggable"
-        @dragstart="dragStart"
-        @dragover="dragOver"
-        @drop="dragDrop"
-        @dragenter="dragEnter"
-        @dragleave="dragLeave"
-        :position="index"
-        :data-index="index"
-        v-for="(item, index) in popupItems"
-        :key="item.id"
-        :popupStyle="popupStyle"
-        :popupContent="popupContent"
-      />
+  <Teleport to="body">
+    <div class="pt_popup" :style="{ backgroundColor: popupStyle.body.bgColor }">
+      <div
+        class="pt_popup_ring"
+        :style="{ borderColor: popupStyle.body.bgColor }"
+      ></div>
+      <div class="pt_popup_content">
+        <component
+          :is="item.id"
+          draggable="true"
+          class="draggable"
+          @dragstart="dragStart"
+          @dragover="dragOver"
+          @drop="dragDrop"
+          @dragenter="dragEnter"
+          @dragleave="dragLeave"
+          :position="index"
+          :data-index="index"
+          v-for="(item, index) in popupItems"
+          :key="item.id"
+          :popupStyle="popupStyle"
+          :popupContent="popupContent"
+        />
+      </div>
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <script>

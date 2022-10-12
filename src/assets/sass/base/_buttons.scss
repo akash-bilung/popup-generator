@@ -1,14 +1,21 @@
 $btn-radius: 5px;
+%btn{
+  display: inline-block;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 500;
+  background: transparent
+}
 
+button{
+  @extend %btn;
+}
 .btn{
-    display: inline-block;
-    border: 1px solid transparent;
+    @extend %btn;
     padding: 1rem 2rem;
-    font-size: 1.6rem;
-    font-weight: 500;
     border-radius: $btn-radius;
     color: $white;
-    cursor: pointer;
     transition: 0.3s background-color ease-in-out;
 }
 

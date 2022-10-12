@@ -1,4 +1,23 @@
 <template>
+  <BaseDialog
+    icon="ti-face-smile"
+    mode="success"
+    v-if="successSubmission"
+    @close="successSubmission = false"
+  >
+    <p class="dialog-title">Yay! Congratulations</p>
+    <p class="mb-2">Your popup has been successfully created.</p>
+    <input :value="url" type="text" readonly class="form-control" />
+  </BaseDialog>
+  <BaseDialog
+    icon="ti-face-sad"
+    mode="danger"
+    v-if="error"
+    @close="error = null"
+  >
+    <p class="dialog-title">Oops! Error Found</p>
+    <p class="mb-2">{{ error }}</p>
+  </BaseDialog>
   <aside class="sidebar">
     <Tab
       :tabs="['Popup Design', 'Popup Content']"
@@ -35,7 +54,7 @@ import BaseFormInput from "@/components/Base/BaseFormInput.vue";
 import Tab from "@/components/Editor/EditorSidebarTab.vue";
 import EditorSidebarDesign from "@/components/Editor/EditorSidebarDesign.vue";
 import EditorSidebarContent from "@/components/Editor/EditorSidebarContent.vue";
-
+import BaseDialog from "@/components/Base/BaseDialog.vue";
 // Mixins
 import popupGenerator from "@/mixins/popupGenerator.js";
 
@@ -48,10 +67,13 @@ export default {
     BaseFormInput,
     Tab,
     EditorSidebarContent,
+    BaseDialog,
     EditorSidebarDesign,
   },
   data() {
     return {
+      error: null,
+      successSubmission: false,
       isLoading: false,
       popupName: "",
       activeTab: "popup-design",
@@ -71,19 +93,25 @@ export default {
     async submitForm() {
       this.isLoading = true;
       this.$emit("formSaved");
-      const { isSuccess } = await this.$store.dispatch("list/createItem", {
-        Name: this.popupName,
-        Slug: this.slugify(this.popupName),
-        Code: this.generatePopup({
-          popupStyle: this.popupStyle,
-          popupContent: this.popupContent,
-          popupItems: this.popupItems,
-        })
-          .init.toString()
-          .replaceAll('"', "'"),
-      });
+      const { isSuccess, message } = await this.$store.dispatch(
+        "list/createItem",
+        {
+          Name: this.popupName,
+          Slug: this.slugify(this.popupName),
+          Code: this.generatePopup({
+            popupStyle: this.popupStyle,
+            popupContent: this.popupContent,
+            popupItems: this.popupItems,
+          })
+            .init.toString()
+            .replaceAll('"', "'"),
+        }
+      );
+      this.isLoading = false;
       if (isSuccess) {
-        this.isLoading = false;
+        this.successSubmission = true;
+      } else {
+        this.error = message;
       }
     },
   },

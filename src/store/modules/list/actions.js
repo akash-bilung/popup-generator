@@ -44,6 +44,7 @@ export default {
       //   formData.append(key, paramObj[key]);
       // }
 
+      // eslint-disable-next-line no-unused-vars
       const res = await axios.post(
         "/process-form.php",
         { snippet, fileTitle: `${fileTitle}.js`, popupName: this.popupName },
@@ -52,9 +53,9 @@ export default {
           baseURL: "https://proj-021.azurewebsites.net",
         }
       );
-      return { isSuccess: true, res };
+      return { isSuccess: true };
     } catch (error) {
-      return { isSuccess: false, error };
+      return { isSuccess: false, message: error.message };
     }
   },
 };
