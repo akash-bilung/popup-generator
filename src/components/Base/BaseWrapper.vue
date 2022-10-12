@@ -14,6 +14,7 @@
               <th>Name</th>
               <th>Created At</th>
               <th>Share URL</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -21,12 +22,16 @@
               <td>{{ popup.Name }}</td>
               <td>{{ popup.createdAt }}</td>
               <td>
-                <a
-                  :href="`https://proj-021.azurewebsites.net/${popup.Slug}.js`"
-                  download
-                  class="btn btn-primary"
-                >
-                  Download snippet
+                <input
+                  type="text"
+                  readonly
+                  :value="popup.Url"
+                  class="form-control"
+                />
+              </td>
+              <td>
+                <a href="#" @click.prevent="copy(popup.Url)">
+                  <i class="ti-clipboard"></i>
                 </a>
               </td>
             </tr>
@@ -43,6 +48,11 @@ export default {
   created() {
     this.$store.dispatch("list/fetchItems");
   },
+  methods: {
+    copy(url) {
+      navigator.clipboard.writeText(url);
+    },
+  },
   computed: {
     ...mapGetters({
       listPopups: "list/getItems",
@@ -50,7 +60,12 @@ export default {
     newList() {
       return this.listPopups.map((e) => {
         const { Name, Slug, createdAt } = (e || {}).attributes || {};
-        return { Name, Slug, createdAt };
+        return {
+          Name,
+          Slug,
+          createdAt,
+          Url: `https://proj-021.azurewebsites.net/${Slug}.js`,
+        };
       });
     },
   },
