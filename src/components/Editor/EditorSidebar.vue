@@ -95,8 +95,9 @@ export default {
         const { data } = await axios.post("http://localhost:1337/api/popups", {
           data: myDataObj,
         });
-        const { Code: snippet } = ((data || {}).data || {}).attributes || {};
-        console.log(snippet);
+        const { Code: snippet, Slug: fileTitle } =
+          ((data || {}).data || {}).attributes || {};
+        console.log(snippet, fileTitle);
       } catch (error) {
         console.log(error);
       }
