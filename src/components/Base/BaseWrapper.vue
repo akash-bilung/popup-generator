@@ -43,13 +43,14 @@
 </template>
 
 <script>
+import moment from "moment";
 import { mapGetters } from "vuex";
 export default {
   created() {
     this.$store.dispatch("list/fetchItems");
   },
   methods: {
-    copy(url) {
+    copy(url) { 
       navigator.clipboard.writeText(url);
     },
   },
@@ -63,7 +64,7 @@ export default {
         return {
           Name,
           Slug,
-          createdAt,
+          createdAt: moment(createdAt).format("MMM Do YYYY, h:mm a"),
           Url: `https://proj-021.azurewebsites.net/${Slug}.js`,
         };
       });
