@@ -6,12 +6,13 @@
       :activeTab="activeTab"
     />
 
-    <form @submit.prevent="submitForm" class="sidebar-form">
+    <form @submit.prevent="submitForm" class="sidebar-form" method="POST">
       <div class="sidebar-form-fieldset">
         <div class="sidebar-section">
           <BaseFormInput
             v-model="popupName"
             label="Popup Name"
+            name="popup-name"
             id="popup-name"
             placeholder="Name of your Popup"
           />
@@ -34,7 +35,7 @@ import EditorSidebarDesign from "@/components/Editor/EditorSidebarDesign.vue";
 import EditorSidebarContent from "@/components/Editor/EditorSidebarContent.vue";
 
 import { mapGetters } from "vuex";
-
+import axios from "axios";
 export default {
   emits: ["formSaved"],
   components: {
@@ -61,6 +62,28 @@ export default {
     },
     submitForm() {
       this.$emit("formSaved");
+
+      const myDataObj = {
+        popupName: this.popupName,
+        file: this.slugify(this.popupName),
+      };
+      // const formData = new FormData();
+
+      // for (let key in myDataObj) {
+      //   formData.append(key, myDataObj[key]);
+      // }
+
+      axios
+        .post("/process-form.php", myDataObj, {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          baseURL: "https://proj-021.azurewebsites.net",
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
 };
