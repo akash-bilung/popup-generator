@@ -85,16 +85,18 @@ export default {
         initFunc()
       })();
       `;
-      // const formData = new FormData();
-
-      // for (let key in myDataObj) {
-      //   formData.append(key, myDataObj[key]);
-      // }
+      /**
+        const formData = new FormData();
+        for (let key in myDataObj) {
+          formData.append(key, myDataObj[key]);
+        } 
+       */
       try {
-        const res = await axios.post("http://localhost:1337/api/popups", {
+        const { data } = await axios.post("http://localhost:1337/api/popups", {
           data: myDataObj,
         });
-        console.log(res);
+        const { Code: snippet } = ((data || {}).data || {}).attributes || {};
+        console.log(snippet);
       } catch (error) {
         console.log(error);
       }
