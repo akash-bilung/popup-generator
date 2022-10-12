@@ -15,7 +15,7 @@
         :readonly="isNumber"
         :placeholder="placeholder"
         :id="id"
-        :class="class"
+        :class="className"
         :value="modelValue"
         @input="changeInput($event)"
       />
@@ -39,7 +39,7 @@ export default {
       type: String,
       default: "",
     },
-    class: {
+    className: {
       type: String,
       default: "",
     },
