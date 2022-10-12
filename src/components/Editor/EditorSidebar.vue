@@ -99,20 +99,19 @@ export default {
         const { Code: snippet, Slug: fileTitle } =
           ((data || {}).data || {}).attributes || {};
         console.log(snippet, fileTitle);
+
+        const res = await axios.post(
+          "/process-form.php",
+          { snippet, fileTitle },
+          {
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            baseURL: "https://proj-021.azurewebsites.net",
+          }
+        );
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
-
-      // .post("/process-form.php", myDataObj, {
-      //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      //   baseURL: "https://proj-021.azurewebsites.net",
-      // })
-      // .then(function (response) {
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
     },
   },
 };
