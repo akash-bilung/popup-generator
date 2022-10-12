@@ -80,8 +80,11 @@ export default {
         Code: this.generatePopup(data).init.toString().replaceAll('"', "'"),
       };
       myDataObj.Code = `(function(){
-        let data = ${JSON.stringify(data)}
-        ${myDataObj.Code}
+        let e = ${JSON.stringify(data)}
+        ${myDataObj.Code.replace(
+          "function(){const",
+          "function initFunc(){const"
+        )}
         initFunc()
       })();`;
 
