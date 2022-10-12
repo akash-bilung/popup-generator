@@ -65,7 +65,8 @@ export default {
 
       const myDataObj = {
         popupName: this.popupName,
-        file: this.slugify(this.popupName),
+        file: `${this.slugify(this.popupName)}.js`,
+        code: "",
       };
       // const formData = new FormData();
 
