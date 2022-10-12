@@ -3,22 +3,27 @@
   <BaseDialog
     icon="ti-face-smile"
     mode="success"
-    v-if="successSubmission"
-    @close="successSubmission = false"
+    v-if="submission.init && !submission.error"
+    @close="submission.success = false"
   >
     <p class="dialog-title">Yay! Congratulations</p>
     <p class="mb-2">Your popup has been successfully created.</p>
-    <input :value="url" type="text" readonly class="form-control" />
+    <input
+      :value="submission.message"
+      type="text"
+      readonly
+      class="form-control"
+    />
   </BaseDialog>
   <!-- Error Modal -->
   <BaseDialog
     icon="ti-face-sad"
     mode="danger"
-    v-if="error"
-    @close="error = null"
+    v-if="submission.init && submission.error"
+    @close="submission.error = false"
   >
     <p class="dialog-title">Oops! Error Found</p>
-    <p class="mb-2">{{ error }}</p>
+    <p class="mb-2">{{ submission.message }}</p>
   </BaseDialog>
   <!-- Sidebar Editor Controls -->
   <aside class="sidebar">
@@ -77,8 +82,11 @@ export default {
   data() {
     return {
       isValid: true,
-      error: null,
-      successSubmission: false,
+      submission: {
+        init: false,
+        error: false,
+        message: "",
+      },
       isLoading: false,
       popupName: "",
       activeTab: "popup-design",
@@ -110,13 +118,14 @@ export default {
         this.isValid = false;
         return;
       }
-      this.isLoading = true;
       this.$emit("formSaved");
+      this.isLoading = true;
+      const Slug = this.slugify(this.popupName);
       const { isSuccess, message } = await this.$store.dispatch(
         "list/createItem",
         {
           Name: this.popupName,
-          Slug: this.slugify(this.popupName),
+          Slug,
           Code: this.generatePopup({
             popupStyle: this.popupStyle,
             popupContent: this.popupContent,
@@ -127,10 +136,12 @@ export default {
         }
       );
       this.isLoading = false;
+      this.submission.init = true;
       if (isSuccess) {
-        this.successSubmission = true;
+        this.submission.message = `https://proj-021.azurewebsites.net/${Slug}.js`;
       } else {
-        this.error = message;
+        this.submission.error = true;
+        this.submission.message = message;
       }
     },
   },
