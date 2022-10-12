@@ -13,7 +13,6 @@
       <input
         type="text"
         :readonly="isNumber"
-        class="form-control"
         :placeholder="placeholder"
         :id="id"
         :value="modelValue"

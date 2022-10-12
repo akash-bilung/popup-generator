@@ -69,7 +69,7 @@ export default {
                   return createElement({
                     elem: "INPUT",
                     type: "text",
-                    className: "pt_popup_input form-control",
+                    className: "pt_popup_input",
                     style: ` background-color: ${dataObj.popupStyle.form.input}; color: ${dataObj.popupStyle.form.inputText}; `,
                     placeholder: dataObj.popupContent.emailPlaceholder,
                   });
