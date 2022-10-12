@@ -18,21 +18,36 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="popup in newList" :key="popup.Slug">
-              <td>{{ popup.Name }}</td>
-              <td>{{ popup.createdAt }}</td>
-              <td>
-                <input
-                  type="text"
-                  readonly
-                  :value="popup.Url"
-                  class="form-control"
-                />
-              </td>
-              <td>
-                <a href="#" @click.prevent="copy(popup.Url)">
-                  <i class="ti-clipboard"></i>
-                </a>
+            <template v-if="newList.length">
+              <tr v-for="popup in newList" :key="popup.Slug">
+                <td>{{ popup.Name }}</td>
+                <td>{{ popup.createdAt }}</td>
+                <td>
+                  <input
+                    type="text"
+                    readonly
+                    :value="popup.Url"
+                    class="form-control"
+                  />
+                </td>
+                <td>
+                  <a href="#" @click.prevent="copy(popup.Url)">
+                    <i class="ti-clipboard"></i>
+                  </a>
+                </td>
+              </tr>
+            </template>
+            <tr>
+              <td colspan="4">
+                <div class="p-2 text-center">
+                  Currently you don't have any popups.
+                  <router-link
+                    class="text-primary text-underline"
+                    to="/popups/create"
+                    >Click here</router-link
+                  >
+                  to create one.
+                </div>
               </td>
             </tr>
           </tbody>

@@ -14,7 +14,7 @@
         <i class="ti-files"></i> <span>Popups</span>
       </router-link>
       <router-link to="/popups/view">
-        <i class="ti-eye"></i> <span>Preview</span>
+        <i class="ti-eye"></i> <span>Rendered View</span>
       </router-link>
       <router-link to="/popups/create">
         <i class="ti-pencil-alt"></i> <span>Create</span>
