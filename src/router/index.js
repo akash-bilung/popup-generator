@@ -16,4 +16,12 @@ const router = createRouter({
   ],
 });
 
+router.beforeEach((to, from, next) => {
+  if (document.querySelector("#pt_popup")) {
+    document.querySelector("#pt_popup").remove();
+    document.querySelector("#pt_stylesheet").remove();
+  }
+  next();
+});
+
 export default router;
