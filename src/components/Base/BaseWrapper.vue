@@ -14,20 +14,20 @@
               <th>Name</th>
               <th>Created At</th>
               <th>Share URL</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Test2</td>
-              <td>Date</td>
-              <td>URL</td>
+            <tr v-for="popup in newList" :key="popup.Slug">
+              <td>{{ popup.Name }}</td>
+              <td>{{ popup.createdAt }}</td>
               <td>
-                <div class="btn-group">
-                  <router-link to="/" class="btn btn-primary">Test</router-link>
-                  <router-link to="/" class="btn btn-primary">Test</router-link>
-                  <router-link to="/" class="btn btn-primary">Test</router-link>
-                </div>
+                <a
+                  :href="`https://proj-021.azurewebsites.net/${popup.Slug}.js`"
+                  download
+                  class="btn btn-primary"
+                >
+                  Download snippet
+                </a>
               </td>
             </tr>
           </tbody>
@@ -38,7 +38,23 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  created() {
+    this.$store.dispatch("list/fetchItems");
+  },
+  computed: {
+    ...mapGetters({
+      listPopups: "list/getItems",
+    }),
+    newList() {
+      return this.listPopups.map((e) => {
+        const { Name, Slug, createdAt } = (e || {}).attributes || {};
+        return { Name, Slug, createdAt };
+      });
+    },
+  },
+};
 </script>
 
 <style></style>

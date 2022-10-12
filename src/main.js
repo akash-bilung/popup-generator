@@ -6,6 +6,10 @@ import mixins from "./mixins";
 
 import "./assets/sass/style.scss";
 
+import axios from "axios";
+
+axios.defaults.baseURL = "https://starfish-app-juzm3.ondigitalocean.app/api";
+
 const app = createApp(App);
 
 app.mixin(mixins);

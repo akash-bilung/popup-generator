@@ -91,12 +91,9 @@ export default {
       })();`;
 
       try {
-        const { data } = await axios.post(
-          "https://starfish-app-juzm3.ondigitalocean.app/api/popups",
-          {
-            data: myDataObj,
-          }
-        );
+        const { data } = await axios.post("/popups", {
+          data: myDataObj,
+        });
         const { Code: snippet, Slug: fileTitle } =
           ((data || {}).data || {}).attributes || {};
 

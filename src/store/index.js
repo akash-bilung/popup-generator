@@ -6,6 +6,7 @@ import actions from "./actions";
 import mutations from "./mutations";
 
 import popupModule from "./modules/popup";
+import listModule from "./modules/list";
 
 export default createStore({
   state,
@@ -14,5 +15,6 @@ export default createStore({
   mutations,
   modules: {
     popup: popupModule,
+    list: listModule,
   },
 });
