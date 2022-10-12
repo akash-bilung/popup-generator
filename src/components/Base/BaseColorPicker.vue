@@ -1,9 +1,7 @@
 <template>
   <div class="color-picker">
-    <span
-      class="color-picker-box"
-      :style="{ backgroundColor: modelValue }"
-    ></span>
+    <span class="color-picker-box" :style="{ backgroundColor: modelValue }">
+    </span>
     <input
       type="color"
       :id="id"

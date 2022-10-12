@@ -40,9 +40,6 @@ export default {
         popupItems: this.popupItems,
       };
       this.generatePopup(data).init();
-      // const container = document.querySelector("#popup-viewport");
-      // container.innerHTML = "";
-      // container.appendChild(this.generatePopup());
     },
   },
 };

@@ -1,4 +1,5 @@
 <template>
+  <!-- Success Modal -->
   <BaseDialog
     icon="ti-face-smile"
     mode="success"
@@ -9,6 +10,7 @@
     <p class="mb-2">Your popup has been successfully created.</p>
     <input :value="url" type="text" readonly class="form-control" />
   </BaseDialog>
+  <!-- Error Modal -->
   <BaseDialog
     icon="ti-face-sad"
     mode="danger"
@@ -18,6 +20,7 @@
     <p class="dialog-title">Oops! Error Found</p>
     <p class="mb-2">{{ error }}</p>
   </BaseDialog>
+  <!-- Sidebar Editor Controls -->
   <aside class="sidebar">
     <Tab
       :tabs="['Popup Design', 'Popup Content']"

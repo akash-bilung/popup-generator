@@ -57,21 +57,17 @@ export default {
       this.dragStartIndex = +e.target
         .closest(".draggable")
         .getAttribute("data-index");
-      // console.log('Event: ', 'dragstart');
     },
 
     dragEnter(e) {
-      // console.log('Event: ', 'dragenter');
       e.target.classList.add("over");
     },
 
     dragLeave(e) {
-      // console.log('Event: ', 'dragleave');
       e.target.classList.remove("over");
     },
 
     dragOver(e) {
-      // console.log('Event: ', 'dragover');
       e.preventDefault();
     },
 
@@ -79,9 +75,7 @@ export default {
       const dragEndIndex = +e.target.getAttribute("data-index");
       this.swapItems(this.dragStartIndex, dragEndIndex);
       e.target.classList.remove("over");
-      // console.log('Event: ', 'drop');
     },
-    // Swap list items that are drag and drop
     swapItems(fromIndex, toIndex) {
       const element = this.popupItems[fromIndex];
       this.popupItems.splice(fromIndex, 1);

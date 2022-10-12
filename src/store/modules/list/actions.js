@@ -5,7 +5,6 @@ export default {
     try {
       const { data } = await axios.get("/popups");
       const items = (data || {}).data || {};
-      console.log(items);
       commit("setItems", items);
     } catch (error) {
       return error;
@@ -38,11 +37,6 @@ export default {
       });
       const { Code: snippet, Slug: fileTitle } =
         ((data || {}).data || {}).attributes || {};
-
-      // const formData = new FormData();
-      // for (let key in paramObj) {
-      //   formData.append(key, paramObj[key]);
-      // }
 
       // eslint-disable-next-line no-unused-vars
       const res = await axios.post(
