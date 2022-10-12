@@ -73,18 +73,13 @@ export default {
 
       const myDataObj = {
         Name: this.popupName,
+        Slug: this.slugify(this.popupName),
         Style: this.popupStyle,
         Content: this.popupContent,
         Order: this.popupItems,
         Code: this.generatePopup(data).init.toString().replaceAll('"', "'"),
       };
-      myDataObj.Code = `
-      (function(){
-        let data = ${JSON.stringify(data)}
-        ${myDataObj.Code}
-        initFunc()
-      })();
-      `;
+      myDataObj.Code = `(function(){ let data = ${JSON.stringify(data)} ${ myDataObj.Code } initFunc() })();`;
       /**
         const formData = new FormData();
         for (let key in myDataObj) {
