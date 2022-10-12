@@ -56,38 +56,59 @@ export default {
     ...mapGetters({
       popupStyle: "popup/getPopupStyle",
       popupContent: "popup/getPopupContent",
+      popupItems: "popup/getPopupOrder",
     }),
   },
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
     },
-    submitForm() {
+    async submitForm() {
       this.$emit("formSaved");
+      const data = {
+        popupStyle: this.popupStyle,
+        popupContent: this.popupContent,
+        popupItems: this.popupItems,
+      };
 
       const myDataObj = {
-        popupName: this.popupName,
-        file: `${this.slugify(this.popupName)}.js`,
-        code: this.generatePopup().init.toString().replaceAll('"', "'"),
+        Name: this.popupName,
+        Style: this.popupStyle,
+        Content: this.popupContent,
+        Order: this.popupItems,
+        Code: this.generatePopup(data).init.toString().replaceAll('"', "'"),
       };
-      console.log(myDataObj);
+      myDataObj.Code = `
+      (function(){
+        let data = ${JSON.stringify(data)}
+        ${myDataObj.Code}
+        initFunc()
+      })();
+      `;
       // const formData = new FormData();
 
       // for (let key in myDataObj) {
       //   formData.append(key, myDataObj[key]);
       // }
-
-      axios
-        .post("/process-form.php", myDataObj, {
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          baseURL: "https://proj-021.azurewebsites.net",
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
+      try {
+        const res = await axios.post("http://localhost:1337/api/popups", {
+          data: myDataObj,
         });
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+
+      // .post("/process-form.php", myDataObj, {
+      //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      //   baseURL: "https://proj-021.azurewebsites.net",
+      // })
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
     },
   },
 };

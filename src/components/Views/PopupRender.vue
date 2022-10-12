@@ -34,7 +34,12 @@ export default {
   },
   methods: {
     renderPopup() {
-      this.generatePopup().init();
+      const data = {
+        popupStyle: this.popupStyle,
+        popupContent: this.popupContent,
+        popupItems: this.popupItems,
+      };
+      this.generatePopup(data).init();
       // const container = document.querySelector("#popup-viewport");
       // container.innerHTML = "";
       // container.appendChild(this.generatePopup());

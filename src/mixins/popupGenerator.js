@@ -8,11 +8,9 @@ export default {
     }),
   },
   methods: {
-    generatePopup() {
-      const vm = this;
-
+    generatePopup(data) {
       const renderer = {
-        init: () => {
+        init: function initFunc() {
           /** Create CSS File */
           const css = document.createElement("style");
           css.type = "text/css";
@@ -32,13 +30,13 @@ export default {
             });
             return element;
           }
-          function initPopup() {
-            let star = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="${vm.popupStyle.content.stars}" viewBox="0 0 24 24"> <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"></path> </svg>`;
+          function initPopup(dataObj) {
+            let star = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="${dataObj.popupStyle.content.stars}" viewBox="0 0 24 24"> <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"></path> </svg>`;
             /** Popup Wrapper */
             let popup = createElement({
               elem: "DIV",
               className: "pt_popup",
-              style: `background-color: ${vm.popupStyle.body.bgColor}`,
+              style: `background-color: ${dataObj.popupStyle.body.bgColor}`,
             });
             const children = [
               {
@@ -48,7 +46,7 @@ export default {
                     elem: "DIV",
                     className: "icons-top pt_popup_icons",
                   });
-                  for (let i = 0; i < vm.popupContent.stars; i++) {
+                  for (let i = 0; i < dataObj.popupContent.stars; i++) {
                     container.innerHTML += star;
                   }
                   return container;
@@ -60,8 +58,8 @@ export default {
                   return createElement({
                     elem: "H2",
                     className: "pt_popup_title",
-                    style: `color: ${vm.popupStyle.content.heading}`,
-                    innerHTML: vm.popupContent.heading,
+                    style: `color: ${dataObj.popupStyle.content.heading}`,
+                    innerHTML: dataObj.popupContent.heading,
                   });
                 },
               },
@@ -72,8 +70,8 @@ export default {
                     elem: "INPUT",
                     type: "text",
                     className: "pt_popup_input form-control",
-                    style: ` background-color: ${vm.popupStyle.form.input}; color: ${vm.popupStyle.form.inputText}; `,
-                    placeholder: vm.popupContent.emailPlaceholder,
+                    style: ` background-color: ${dataObj.popupStyle.form.input}; color: ${dataObj.popupStyle.form.inputText}; `,
+                    placeholder: dataObj.popupContent.emailPlaceholder,
                   });
                 },
               },
@@ -84,8 +82,8 @@ export default {
                     elem: "BUTTON",
                     type: "submit",
                     className: "pt_popup_input_submit",
-                    style: `background-color: ${vm.popupStyle.form.btn};`,
-                    innerHTML: vm.popupContent.btnText,
+                    style: `background-color: ${dataObj.popupStyle.form.btn};`,
+                    innerHTML: dataObj.popupContent.btnText,
                   });
                 },
               },
@@ -94,8 +92,8 @@ export default {
                 item: () => {
                   return createElement({
                     elem: "p",
-                    style: `color: ${vm.popupStyle.content.text};`,
-                    innerHTML: vm.popupContent.footerText,
+                    style: `color: ${dataObj.popupStyle.content.text};`,
+                    innerHTML: dataObj.popupContent.footerText,
                   });
                 },
               },
@@ -108,7 +106,7 @@ export default {
             [...children]
               .map((t1) => ({
                 ...t1,
-                ...vm.popupItems.find((t2) => t2.id === t1.id),
+                ...dataObj.popupItems.find((t2) => t2.id === t1.id),
               }))
               .sort((a, b) => a.order - b.order)
               .forEach((e) => {
@@ -117,7 +115,7 @@ export default {
             popup.appendChild(popupContent);
             return popup;
           }
-          document.body.appendChild(initPopup());
+          document.body.appendChild(initPopup(data));
         },
       };
       return renderer;
