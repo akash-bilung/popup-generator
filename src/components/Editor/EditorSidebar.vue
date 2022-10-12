@@ -5,7 +5,6 @@
       @setActiveTab="setActiveTab"
       :activeTab="activeTab"
     />
-
     <form @submit.prevent="submitForm" class="sidebar-form" method="POST">
       <div class="sidebar-form-fieldset">
         <div class="sidebar-section">
@@ -22,7 +21,9 @@
       </div>
 
       <div class="sidebar-form-btn">
-        <button type="submit" class="btn btn-primary btn-block">Save</button>
+        <button type="submit" class="btn btn-primary btn-block">
+          {{ isLoading ? "Please wait . . ." : "Save" }}
+        </button>
       </div>
     </form>
   </aside>
@@ -48,6 +49,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       popupName: "",
       activeTab: "popup-design",
     };

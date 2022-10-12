@@ -1,10 +1,9 @@
 <template>
-  <div
-    class="pt_popup"
-    :style="{
-      backgroundColor: popupStyle.body.bgColor,
-    }"
-  >
+  <div class="pt_popup" :style="{ backgroundColor: popupStyle.body.bgColor }">
+    <div
+      class="pt_popup_ring"
+      :style="{ borderColor: popupStyle.body.bgColor }"
+    ></div>
     <div class="pt_popup_content">
       <component
         :is="item.id"
