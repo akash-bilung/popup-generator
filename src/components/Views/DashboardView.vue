@@ -30,8 +30,13 @@
                 />
               </td>
               <td>
-                <a href="#" @click.prevent="copy(popup.Url)">
+                <a
+                  href="#"
+                  class="clipboard"
+                  @click.prevent="copy(popup.Url, $event)"
+                >
                   <i class="ti-clipboard"></i>
+                  <span>Copy to clipboard</span>
                 </a>
               </td>
             </tr>
@@ -66,7 +71,21 @@ export default {
     this.$store.dispatch("list/fetchItems");
   },
   methods: {
-    copy(url) {
+    copy(url, e) {
+      const copiedText = "Copied to clipboard";
+      const copyText = "Copy to clipboard";
+      if (e.target.nodeName === "I") {
+        e.target.nextSibling.innerHTML = copiedText;
+        setTimeout(() => {
+          e.target.nextSibling.innerHTML = copyText;
+        }, 1000);
+      }
+      if (e.target.nodeName === "A") {
+        e.target.querySelector("span").innerHTML = copiedText;
+        setTimeout(() => {
+          e.target.querySelector("span").innerHTML = copyText;
+        }, 1000);
+      }
       navigator.clipboard.writeText(url);
     },
   },

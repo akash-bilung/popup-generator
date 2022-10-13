@@ -1,6 +1,10 @@
 <template>
   <div class="color-picker">
-    <span class="color-picker-box" :style="{ backgroundColor: modelValue }">
+    <span
+      class="color-picker-box"
+      @click="trigerClick"
+      :style="{ backgroundColor: modelValue }"
+    >
     </span>
     <input
       type="color"
@@ -31,6 +35,9 @@ export default {
     },
   },
   methods: {
+    trigerClick() {
+      document.getElementById(this.id).click();
+    },
     changeColor(event) {
       this.$emit("update:modelValue", event.target.value);
     },

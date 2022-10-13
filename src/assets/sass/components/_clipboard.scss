@@ -1,0 +1,26 @@
+.clipboard{
+    position: relative;
+    display: block;
+    text-align: center;
+    & > span{
+        position: absolute;
+        top: calc(-100% - 1rem);
+        left: 50%;
+        transform: translateX(-50%);
+        background: $black;
+        white-space: nowrap;
+        padding: 0.5rem 1rem;
+        font-size: 1.4rem;
+        border-radius: 5px;
+        color: $white;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.25s opacity ease;
+    }
+    &:hover{
+        & > span{
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
