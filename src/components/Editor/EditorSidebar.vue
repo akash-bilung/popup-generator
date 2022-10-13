@@ -4,7 +4,7 @@
     icon="ti-face-smile"
     mode="success"
     v-if="submission.init && !submission.error"
-    @close="close"
+    @close="close(true)"
   >
     <p class="dialog-title">Yay! Congratulations</p>
     <p class="mb-2">Your popup has been successfully created.</p>
@@ -20,7 +20,7 @@
     icon="ti-face-sad"
     mode="danger"
     v-if="submission.init && submission.error"
-    @close="close"
+    @close="close(false)"
   >
     <p class="dialog-title">Oops! Error Found</p>
     <p class="mb-2">{{ submission.message }}</p>
@@ -147,12 +147,15 @@ export default {
         this.submission.message = message;
       }
     },
-    close() {
+    close(redirect) {
       this.submission = {
         init: false,
         error: false,
         message: "",
       };
+      if (redirect) {
+        this.$router.replace("/");
+      }
     },
   },
 };

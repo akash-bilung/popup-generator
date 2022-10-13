@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   async fetchItems({ commit }) {
     try {
-      const { data } = await axios.get("/popups");
+      const { data } = await axios.get("/popups?sort=createdAt:DESC");
       const items = (data || {}).data || {};
       commit("setItems", items);
     } catch (error) {
