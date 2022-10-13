@@ -36,7 +36,7 @@
       <div class="sidebar-form-fieldset">
         <div class="sidebar-section">
           <BaseFormInput
-            v-model.trim="popupName"
+            v-model.trim="popupContent.title"
             label="Popup Name"
             :mode="isValid ? '' : 'danger'"
             name="popup-name"
@@ -88,19 +88,22 @@ export default {
         message: "",
       },
       isLoading: false,
-      popupName: "",
       activeTab: "popup-design",
     };
   },
   watch: {
-    // eslint-disable-next-line no-unused-vars
-    popupName(after, before) {
-      if (after) {
-        this.isValid = true;
-      } else {
-        this.isValid = false;
-      }
+    popupContent: {
+      // eslint-disable-next-line no-unused-vars
+      handler(after, before) {
+        if (after.title) {
+          this.isValid = true;
+        } else {
+          this.isValid = false;
+        }
+      },
+      deep: true,
     },
+    // eslint-disable-next-line no-unused-vars
   },
   computed: {
     ...mapGetters({
@@ -114,17 +117,17 @@ export default {
       this.activeTab = tab;
     },
     async submitForm() {
-      if (!this.popupName) {
+      if (!this.popupContent.title) {
         this.isValid = false;
         return;
       }
       this.$emit("formSaved");
       this.isLoading = true;
-      const Slug = this.slugify(this.popupName);
+      const Slug = this.slugify(this.popupContent.title);
       const { isSuccess, message } = await this.$store.dispatch(
         "list/createItem",
         {
-          Name: this.popupName,
+          Name: this.popupContent.title,
           Slug,
           Code: this.generatePopup({
             popupStyle: this.popupStyle,

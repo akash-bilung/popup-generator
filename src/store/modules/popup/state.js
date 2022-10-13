@@ -22,6 +22,7 @@ export default () => ({
     },
   },
   content: {
+    title: "",
     heading: `All the text and elements in this popup should be editable and dragable`,
     stars: 3,
     footerText: "No credit card required. No Surprises",
