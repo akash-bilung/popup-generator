@@ -8,7 +8,7 @@ import "./assets/sass/style.scss";
 
 import axios from "axios";
 
-axios.defaults.baseURL = "https://starfish-app-juzm3.ondigitalocean.app/api";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 const app = createApp(App);
 
