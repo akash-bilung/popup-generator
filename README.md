@@ -2,4 +2,4 @@
 
 A popup generator that can pluged in any of the websites. :)
 
-#### [Demo URL](https://poptin-git-main-akash-bilung.vercel.app/popups)
+#### [Demo URL](https://poptin.vercel.app/popups/create)
